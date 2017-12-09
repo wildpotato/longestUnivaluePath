@@ -47,24 +47,33 @@ tree is not more than 1000.
  *     struct TreeNode *right;
  * };
  */
-int max(int a, int b) {
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+uint16_t max(uint16_t a, uint16_t b) {
     return a > b ? a : b;
 }
 
-int longestUnivaluePath_helper(struct TreeNode* root, int* ans) {
+uint16_t longestUnivaluePath_helper(struct TreeNode* root, uint16_t* ans) {
     if (root == NULL) return 0;
-    int longestUnival_left = longestUnivaluePath_helper(root->left, ans);
-    int longestUnival_right = longestUnivaluePath_helper(root->right, ans);
-    int pl = 0, pr = 0;
+    uint16_t longestUnival_left = longestUnivaluePath_helper(root->left, ans);
+    uint16_t longestUnival_right = longestUnivaluePath_helper(root->right, ans);
+    uint16_t pl = 0, pr = 0;
     if (root->left && root->val == root->left->val) pl = longestUnival_left + 1;
     if (root->right && root->val == root->right->val) pr = longestUnival_right + 1;
     *ans = max(*ans, pl + pr);
     return max(pl, pr);
 }
 
-int longestUnivaluePath(struct TreeNode* root) {
+uint16_t longestUnivaluePath(struct TreeNode* root) {
     // if (root == NULL) return 0;
-    int ans = 0;
+    uint16_t ans = 0;
     longestUnivaluePath_helper(root, &ans);
     return ans;
 }
